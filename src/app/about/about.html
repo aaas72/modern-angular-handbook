@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto space-y-8 p-6">
+
+  <!-- Header -->
+  <div class="text-center space-y-3">
+    <h1 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-500">
+      About Modern Angular Lab 🅰️
+    </h1>
+    <p class="text-slate-400 text-base max-w-2xl mx-auto">
+      An open-source interactive learning playground engineered to demonstrate state-of-the-art Angular 19+ development patterns.
+    </p>
+  </div>
+
+  <!-- Highlights Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <app-card 
+      title="Signals & Fine-grained Reactivity" 
+      description="Leveraging Angular's reactive primitives (signal, computed, effect) for pinpoint DOM updates without dirty checking."
+      tag="Core Reactivity">
+    </app-card>
+
+    <app-card 
+      title="Standalone & Lazy Routing" 
+      description="Zero NgModule boilerplate with standalone components and route-level code splitting via dynamic imports."
+      tag="Architecture">
+    </app-card>
+
+    <app-card 
+      title="Enterprise HTTP & Services" 
+      description="Robust API communication using injectable services, functional interceptors, and RxJS stream resilience."
+      tag="Networking">
+    </app-card>
+
+    <app-card 
+      title="Type-Safe Reactive Forms" 
+      description="Declarative form controls, real-time validations, and automatic UI feedback bindings."
+      tag="Forms & UI">
+    </app-card>
+  </div>
+
+  <!-- Tech Stack Badges -->
+  <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-6 text-center space-y-4">
+    <h2 class="text-lg font-bold text-white">Built with Modern Web Standards</h2>
+    <div class="flex flex-wrap justify-center gap-3 text-xs font-semibold">
+      <span class="bg-red-500/20 text-red-300 border border-red-500/30 px-3 py-1.5 rounded-lg">Angular 19+</span>
+      <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 px-3 py-1.5 rounded-lg">TypeScript 5+</span>
+      <span class="bg-teal-500/20 text-teal-300 border border-teal-500/30 px-3 py-1.5 rounded-lg">TailwindCSS</span>
+      <span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1.5 rounded-lg">RxJS & Signals</span>
+    </div>
+  </div>
+
+</div>

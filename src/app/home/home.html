@@ -1,0 +1,265 @@
+<div class="max-w-6xl mx-auto p-6 space-y-12">
+
+  <!-- ============================================================= -->
+  <!-- Header Banner -->
+  <!-- ============================================================= -->
+  <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center space-y-3">
+    <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1.5 rounded-full">
+      <span>⚡ Angular 19+ Modern Architecture Showcase</span>
+    </div>
+    <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+      Modern Angular <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">Interactive Lab</span>
+    </h1>
+    <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
+      Explore reactive Signals, component communication, enterprise HTTP services, and reactive forms in action.
+    </p>
+    <div class="pt-2 text-xs text-slate-400 flex items-center justify-center gap-2">
+      <span>Today's Date (DatePipe):</span>
+      <strong class="text-indigo-300 font-mono">{{ today | date:'fullDate' }}</strong>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- SECTION 1: Angular Signals & Computed State -->
+  <!-- ============================================================= -->
+  <section class="space-y-4">
+    <div class="border-b border-slate-800 pb-3">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <span class="text-indigo-400">01.</span> Reactive State with Signals & Computed ⚡
+      </h2>
+      <p class="text-slate-400 text-xs mt-1">Fine-grained reactivity with zero dependency arrays and instant DOM node updates.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 1A: Counter Signal -->
+      <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-xl flex flex-col justify-between text-center">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Interactive Primitive Signal</span>
+          <div class="text-6xl font-black text-white my-4 font-mono">{{ counter() }}</div>
+        </div>
+        <div class="flex justify-center gap-3">
+          <button (click)="decrement()" class="bg-red-500/90 hover:bg-red-500 active:scale-95 text-white px-5 py-2 rounded-xl text-sm font-bold transition">
+            - Decrement
+          </button>
+          <button (click)="resetCounter()" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition">
+            Reset
+          </button>
+          <button (click)="increment()" class="bg-emerald-500/90 hover:bg-emerald-500 active:scale-95 text-white px-5 py-2 rounded-xl text-sm font-bold transition">
+            + Increment
+          </button>
+        </div>
+      </div>
+
+      <!-- 1B: Computed Shopping Cart -->
+      <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-pink-400">Automatic Memoized Calculation (Computed)</span>
+          
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-slate-700/60 text-sm">
+              <span class="text-slate-400">Unit Price:</span>
+              <span class="font-mono font-bold text-white">{{ unitPrice() | currency:'USD' }}</span>
+            </div>
+
+            <div class="flex justify-between items-center py-2 border-b border-slate-700/60 text-sm">
+              <span class="text-slate-400">Quantity:</span>
+              <div class="flex items-center gap-3">
+                <button (click)="decreaseQuantity()" class="bg-slate-700 hover:bg-slate-600 text-white w-7 h-7 rounded-lg font-bold text-xs">-</button>
+                <span class="font-bold text-white font-mono w-4 text-center">{{ quantity() }}</span>
+                <button (click)="increaseQuantity()" class="bg-slate-700 hover:bg-slate-600 text-white w-7 h-7 rounded-lg font-bold text-xs">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-700/60">
+          <span class="text-slate-300 font-bold text-sm">Computed Total:</span>
+          <span class="text-2xl font-black text-emerald-400 font-mono">{{ totalPrice() | currency:'USD' }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SECTION 2: Component Communication (Inputs & Outputs) -->
+  <!-- ============================================================= -->
+  <section class="space-y-4">
+    <div class="border-b border-slate-800 pb-3">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <span class="text-purple-400">02.</span> Component Communication (Inputs & Outputs) 🎴
+      </h2>
+      <p class="text-slate-400 text-xs mt-1">Parent passes properties via <code class="text-indigo-300">[title]</code> and listens to child events via <code class="text-pink-300">(actionClick)</code>.</p>
+    </div>
+
+    <!-- Active Selection Notification -->
+    @if (selectedTrack()) {
+      <div class="bg-indigo-950/70 border border-indigo-500/50 text-indigo-200 p-4 rounded-xl text-center shadow-lg animate-fade-in flex items-center justify-center gap-2 text-sm">
+        <span>Selected Track:</span>
+        <strong class="text-white font-bold">{{ selectedTrack() }}</strong>
+      </div>
+    }
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      @for (track of learningTracks(); track track.id) {
+        <app-card 
+          [title]="track.title" 
+          [description]="track.desc" 
+          [tag]="track.tag" 
+          (actionClick)="handleTrackSelect($event)">
+        </app-card>
+      }
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SECTION 3: Reactive Forms & Real-time Validation -->
+  <!-- ============================================================= -->
+  <section class="space-y-4">
+    <div class="border-b border-slate-800 pb-3">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <span class="text-amber-400">03.</span> Reactive Forms & Real-Time Validation 📝
+      </h2>
+      <p class="text-slate-400 text-xs mt-1">Type-safe form controls, custom state tracking (touched, dirty, invalid), and no external libraries required.</p>
+    </div>
+
+    <div class="bg-slate-800/90 border border-slate-700/80 p-6 rounded-2xl shadow-xl">
+      <form [formGroup]="newProductForm" (ngSubmit)="onFormSubmit()" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- Title Input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Product Title</label>
+          <input 
+            type="text" 
+            formControlName="title"
+            placeholder="e.g. Ultra Gaming Monitor"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500 transition" />
+          
+          @if (newProductForm.get('title')?.touched && newProductForm.get('title')?.invalid) {
+            <p class="text-red-400 text-xs mt-1">Title is required (min 3 characters).</p>
+          }
+        </div>
+
+        <!-- Price Input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Price ($)</label>
+          <input 
+            type="number" 
+            formControlName="price"
+            placeholder="e.g. 299"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500 transition" />
+          
+          @if (newProductForm.get('price')?.touched && newProductForm.get('price')?.invalid) {
+            <p class="text-red-400 text-xs mt-1">Valid positive price is required.</p>
+          }
+        </div>
+
+        <!-- Category Select -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+          <select 
+            formControlName="category"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
+            <option value="electronics">Electronics</option>
+            <option value="jewelery">Jewelery</option>
+            <option value="men's clothing">Men's Clothing</option>
+            <option value="women's clothing">Women's Clothing</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="md:col-span-3 mt-2">
+          <button 
+            type="submit" 
+            [disabled]="newProductForm.invalid"
+            class="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+            <span>Add Product to Store</span> 🚀
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SECTION 4: Enterprise HTTP Client & Live API Grid -->
+  <!-- ============================================================= -->
+  <section class="space-y-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-3">
+      <div>
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+          <span class="text-teal-400">04.</span> Enterprise HTTP Client & Pipes 🌐🎨
+        </h2>
+        <p class="text-slate-400 text-xs mt-1">Real FakeStore REST API data transformed with CurrencyPipe and UpperCasePipe.</p>
+      </div>
+
+      <button 
+        (click)="fetchProducts()" 
+        class="bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-95 text-white text-xs px-4 py-2 rounded-xl font-bold transition flex items-center gap-1.5 shadow-md">
+        <span>🔄 Reload API Data</span>
+      </button>
+    </div>
+
+    <!-- 4A: Skeleton Loading State -->
+    @if (isLoading()) {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 h-80 animate-pulse flex flex-col justify-between">
+            <div class="w-full h-40 bg-slate-700/50 rounded-xl mb-4"></div>
+            <div class="h-4 bg-slate-700/50 rounded w-3/4 mb-2"></div>
+            <div class="h-4 bg-slate-700/50 rounded w-1/2"></div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- 4B: Error State -->
+    @if (errorMessage()) {
+      <div class="bg-red-950/60 border border-red-500/50 text-red-300 p-6 rounded-2xl text-center space-y-3">
+        <p class="text-base font-bold">⚠️ {{ errorMessage() }}</p>
+        <button (click)="fetchProducts()" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+          Try Again
+        </button>
+      </div>
+    }
+
+    <!-- 4C: Success State Product Cards Grid -->
+    @if (!isLoading() && !errorMessage()) {
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (product of products(); track product.id) {
+          <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 flex flex-col justify-between hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 transform hover:-translate-y-1">
+            <div>
+              <!-- Product Image via [src] Property Binding -->
+              <div class="bg-white p-4 rounded-xl mb-4 h-48 flex items-center justify-center overflow-hidden">
+                <img [src]="product.image" [alt]="product.title" class="max-h-40 object-contain hover:scale-105 transition" />
+              </div>
+
+              <!-- Category formatted with UpperCasePipe -->
+              <span class="text-xs uppercase tracking-wider font-semibold text-indigo-400 bg-indigo-950/60 px-2.5 py-1 rounded-md border border-indigo-800/50">
+                {{ product.category | uppercase }}
+              </span>
+
+              <!-- Title -->
+              <h3 class="text-base font-bold text-white mt-3 line-clamp-1" [title]="product.title">
+                {{ product.title }}
+              </h3>
+
+              <!-- Description -->
+              <p class="text-slate-400 text-xs mt-2 line-clamp-2 leading-relaxed">
+                {{ product.description }}
+              </p>
+            </div>
+
+            <!-- Price formatted with CurrencyPipe -->
+            <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-700/60">
+              <span class="text-xl font-black text-emerald-400 font-mono">
+                {{ product.price | currency:'USD' }}
+              </span>
+              <span class="text-xs text-slate-400 font-mono">#{{ product.id }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+</div>
