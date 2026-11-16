@@ -1,15 +1,14 @@
-# 🚀 Modern Angular Architecture & Master Handbook (Angular 19+)
+# Modern Angular Handbook
 
-<div align="center">
+A practical reference for modern Angular (v19+): standalone components, Signals, the new control flow, signal-based inputs and outputs, lazy routing, HTTP services, reactive forms and pipes — with a side-by-side comparison to React. The repository is also a runnable Angular 21 app with server-side rendering, so every concept can be explored in real code.
 
-![Angular](https://img.shields.io/badge/Angular-19+-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Signals](https://img.shields.io/badge/Architecture-Signals_&_Standalone-7928CA?style=for-the-badge)
+![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=flat-square&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Signals](https://img.shields.io/badge/Signals_&_Standalone-7928CA?style=flat-square)
+![SSR](https://img.shields.io/badge/SSR-Hydration-555555?style=flat-square)
 
-**A clean, comprehensive, enterprise-grade educational guide and reference repository demonstrating Modern Angular concepts, architecture, reactivity with Signals, and direct comparisons with React.**
-
-</div>
+> Sections that show code from `src/` describe the running app; sections on interceptors and reactive forms are reference patterns to copy into your own projects.
 
 ---
 
@@ -331,12 +330,13 @@ Declarative data transformations directly within template expressions:
 ## 11. Getting Started Locally
 
 ### Prerequisites:
-* Node.js v18.19+ or higher
-* Angular CLI v19+
+* Node.js 20.19+ (required by Angular 21)
+* Angular CLI 21 (optional — `npm run start` uses the local CLI)
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-username/my-angular-app.git
+git clone https://github.com/aaas72/modern-angular-handbook.git
+cd modern-angular-handbook
 
 # 2. Install dependencies
 npm install
@@ -354,8 +354,6 @@ Navigate to `http://localhost:4200/` in your browser.
 
 ---
 
-<div align="center">
+## Author
 
-⭐ **Authored and curated as an open-source educational standard for Modern Angular developers.**
-
-</div>
+**Abdellah Sheikh** — [abdellahsheikh.dev](https://abdellahsheikh.dev) · [LinkedIn](https://www.linkedin.com/in/abdellahsheikh)
